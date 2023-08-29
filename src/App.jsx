@@ -1,9 +1,11 @@
 import React from 'react'
+import { ThemeProvider } from '@mui/material'
+import { theme } from './theme/theme'
 
 function App() {
   return (
     <>
-      <h1>SV Ayurveda</h1>
+      <ThemeProvider theme={theme}></ThemeProvider>
     </>
   )
 }

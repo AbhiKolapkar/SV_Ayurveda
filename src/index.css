@@ -1,0 +1,121 @@
+/********************* Import Google fonts *********************/
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+/********************* CSS Variables *********************/
+:root {
+  /* colors */
+  --white: #ffffff;
+  --black: #010101;
+  --dark-blue: #0f424d;
+  --dark-green: #869633;
+  --darker-green: #60682a;
+  --light-green: #acbd33;
+  --light-white: #eef2d6;
+
+  /* typography */
+  --poppins: "Poppins", sans-serif;
+  --playfair: "Playfair Display", serif;
+
+  /* margin */
+  --section-margin: 64px;
+}
+
+
+/********************* Reset CSS *********************/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--poppins);
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--white);
+  line-height: 1.7;
+  padding-bottom: 0.625rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  /* width: 100%; */
+  max-inline-size: 100%;
+  block-size: auto;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+input:not([type="radio"]) {
+  width: 100%;
+  background: none;
+  font: inherit;
+}
+
+button {
+  width: max-content;
+  height: fit-content;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+pre {
+  font-family: var(--poppins);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
+/********** Custom Scroll-Bar **********/
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--light-white);
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--light-white);
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--dark-blue);
+}
+
+/********************* Utility CSS *********************/
+.section {
+  margin-block-end: var(--section-margin);
+}
+
+.imgBox, .imgBox a {
+  display: grid;
+  place-content: center;
+  position: relative;
+}
+
+.imgBox img {
+  border-radius: 1.875rem;
+}
+
+.imgBox .name_plate {
+  position: absolute;
+  left: 50%;
+  bottom: -15%;
+  transform: translate(-50%, -50%);
+  background-color: #acbd33;
+}
