@@ -1,12 +1,74 @@
-import React from 'react'
-import styles from './style.module.css'
+import React, { useState } from "react";
+import { Box, Container, Typography } from "@mui/material";
+import CountUp from "react-countup";
+import ScrollTrigger from "react-scroll-trigger";
+import { BannerImages_Data } from "../../data/images";
+import { Counter_Data } from "../../data/constant";
+import styles from "./style.module.css";
 
 const Counter = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const {counterBanner} = BannerImages_Data
+  const [counterOn, setCounterOn] = useState(false);
+  const onEnter = () => {
+    setCounterOn(true);
+  };
+  const onExit = () => {
+    setCounterOn(false);
+  };
 
-export default Counter
+  return (
+    <>
+      <ScrollTrigger onEnter={onEnter} onExit={onExit}>
+        <Container
+          maxWidth={false}
+          disableGutters
+          data-bg={counterBanner}
+          className="lazyload"
+          sx={{
+            backgroundImage: `url(${counterBanner})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: { xs: "cover", lg: "100%" },
+          }}
+        >
+          <Container maxWidth="lg">
+            <Box className={styles.counter_container}>
+              {Counter_Data.map(({ id, icon, count, text }) => (
+                <Box key={id} className={styles.counterBox}>
+                  <img
+                    src={icon}
+                    alt=""
+                    width={id === 3 ? 65 : 55}
+                    style={{ borderRadius: 0 }}
+                  />
+                  <div className={styles.count}>
+                    {counterOn && (
+                      <CountUp start={0} end={count} delay={0}>
+                        {({ countUpRef }) => (
+                          <Typography
+                            variant="count"
+                            color="text.primary"
+                            ref={countUpRef}
+                          ></Typography>
+                        )}
+                      </CountUp>
+                    )}
+                  </div>
+                  <Typography
+                    variant="subtitle1"
+                    color="text.quinary"
+                    textAlign="center"
+                    mt={"auto"}
+                  >
+                    {text}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Container>
+        </Container>
+      </ScrollTrigger>
+    </>
+  );
+};
+
+export default Counter;

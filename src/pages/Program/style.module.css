@@ -1,0 +1,123 @@
+/* form-box */
+.form_box {
+  height: auto;
+  border-radius: 1.875rem;
+  background: #fffdfd;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.25);
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.header_text {
+  display: inline-block;
+  position: relative;
+  border-bottom: 2px dashed rgba(172, 189, 51, 0.4);
+  margin-bottom: 0.56rem;
+}
+
+.form_box form {
+  height: 100%;
+  flex-grow: 1;
+  display: grid;
+  justify-content: center;
+  gap: 6rem;
+  padding-inline-end: 2rem;
+}
+
+.form_box form .input_fields {
+  display: grid;
+  gap: 2.75rem;
+}
+
+.btn {
+  margin-top: 0;
+  background: #d5dd98;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.grid_wrapper {
+  display: flex;
+  column-gap: 1.5rem;
+}
+
+/* content-box */
+.content_box {
+  height: auto;
+  border-radius: 1.875rem;
+  background: #eef2d6;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.25);
+  padding: 2rem 2.5rem;
+}
+
+.content_box ul {
+  margin-inline-start: 23px;
+}
+
+.content_box  ul li {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 174%;
+  color: #60682A;
+}
+
+.content_box .detailsBox {
+  position: relative;
+}
+
+.content_box .detailsBox::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20%;
+  height: 1px;
+  padding-block: 2.5rem 1.87rem;
+  border-bottom: 2px dashed rgba(172, 189, 51, 0.4);
+}
+
+.content_box .dropdown {
+  width: 50%;
+  padding: 8px 16px;
+  border-radius: 1.875rem;
+  border: 2px solid #ACBD33;
+  font-size: 1rem;
+  color: #0F424D;
+  outline: none;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 1100px) {
+  .form_box {
+    padding-inline-end: 3.56rem;
+  }
+
+  .content_box {
+    padding-inline-start: 2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  
+  .form_box {
+    padding-inline: 1rem;
+  }
+  
+  .form_box form {
+    padding-inline-end: 0;
+  }
+  
+  /* .grid_wrapper {
+    flex-direction: column;
+    row-gap: 2.75rem;
+  } */
+
+  .content_box {
+    padding: 2.5rem 1rem;
+  }
+}
