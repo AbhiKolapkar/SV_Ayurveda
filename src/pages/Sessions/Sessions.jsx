@@ -5,6 +5,7 @@ import { BannerImages_Data } from "../../data/images";
 import { Title } from "../../components/Title/Title";
 import Tabs from "../../components/Tabs/Tabs";
 import Fallback from "../../common/Fallback";
+import { SESSIONS_API_URL } from "../../data/apiData";
 
 const Sessions = () => {
   const { sessionBanner } = BannerImages_Data;
@@ -13,7 +14,7 @@ const Sessions = () => {
 
   useEffect(() => {
     axios
-      .get('https://api.svayurved.com/getSessions')
+      .get(SESSIONS_API_URL)
       .then((res) => setSessionsData(res.data.sessions))
       .catch((error) => console.error("error fetching data", error));
   }, []);

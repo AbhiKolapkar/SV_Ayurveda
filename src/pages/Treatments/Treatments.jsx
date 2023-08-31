@@ -5,11 +5,11 @@ import { BannerImages_Data } from "../../data/images";
 import { Title } from "../../components/Title/Title";
 import Tabs from "../../components/Tabs/Tabs";
 import Fallback from "../../common/Fallback";
+import { TREATMENTS_API_URL } from "../../data/apiData";
 
 const Treatments = () => {
   const { treatmentBanner } = BannerImages_Data;
-  const API_URL =
-    "https://api.svayurved.com/getTreatments";
+  const API_URL = TREATMENTS_API_URL;
   const [treatmentsData, setTreatmentsData] = useState(null);
 
   useEffect(() => {

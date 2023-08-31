@@ -5,6 +5,13 @@ const { img1, img2, img3, img4, img5, img6, img7, img8, img9 } =
 
 const { client1, client2, client3 } = Happy_Clients_Images;
 
+const API_URL = "https://api.svayurved.com/";
+export const BLOGS_API_URL = API_URL + "getBlogs";
+export const TREATMENTS_API_URL = API_URL + "getTreatments";
+export const SESSIONS_API_URL = API_URL + "getSessions";
+export const CONTACT_API_URL = API_URL + "user-contact";
+export const PROGRAMS_API_URL = API_URL + "enroll-programs";
+
 /* **** *** media data *** **** */
 export const Media_Data = [
   {

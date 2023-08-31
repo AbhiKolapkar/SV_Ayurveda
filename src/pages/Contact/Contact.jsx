@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -19,7 +19,8 @@ import {
   Message_Validation,
   Phone_Number_Validation,
 } from "../../components/Custom_Inputs/validation";
-import styles from './style.module.css'
+import styles from "./style.module.css";
+import { CONTACT_API_URL } from "../../data/apiData";
 
 const Contact = () => {
   const {
@@ -39,21 +40,17 @@ const Contact = () => {
       }
 
       // Append files to the FormData object
-      const response = await axios.post(
-        "https://api.svayurved.com/user-contact",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(CONTACT_API_URL, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log("Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
     }
 
-    reset()
+    reset();
   };
 
   return (
@@ -182,7 +179,7 @@ const Contact = () => {
         </Grid>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

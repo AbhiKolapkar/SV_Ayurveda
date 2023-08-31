@@ -20,6 +20,7 @@ import {
 import { Button } from "../../common/BookingBtn";
 import { BannerImages_Data } from "../../data/images";
 import styles from "./style.module.css";
+import { PROGRAMS_API_URL } from "../../data/apiData";
 
 const Program = () => {
   const { programBanner } = BannerImages_Data;
@@ -38,11 +39,9 @@ const Program = () => {
         formData.append(key, data[key]); // Append files to the FormData object
       }
 
-      const response = await axios.post(
-        "https://api.svayurved.com/enroll-programs",
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+      const response = await axios.post(PROGRAMS_API_URL, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       console.log("Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
