@@ -20,7 +20,7 @@ export const PATHS = {
   GALLERY_PAGE: "/gallery",
   PROGRAM_PAGE: "/program",
   BLOGS_PAGE: "/blogs",
-  BLOG_DETAILS_PAGE: "/blog-details/:path",
+  BLOG_DETAILS_PAGE: "/:slug",
   UPDATES_PAGE: "/updates",
   CONTACT_PAGE: "/contact",
   PRIVACY_POLICY_PAGE: "/policy",

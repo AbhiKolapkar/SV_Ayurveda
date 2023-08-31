@@ -21,6 +21,7 @@ const Card = (props) => {
               variant="h5"
               color="text.secondary"
               className={styles.title}
+              textAlign={{xs:'center', sm:'left'}}
             >
               {title}
             </Typography>

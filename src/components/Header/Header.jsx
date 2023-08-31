@@ -5,6 +5,7 @@ import logo from "/SV_Logo.svg";
 import { BookingBtn } from "../../common/BookingBtn";
 import { DesktopMenu, MobileMenu, TabMenu } from "./Menus";
 import styles from "./style.module.css";
+import { PATHS } from "../../data/constant";
 
 const Header = () => {
   const isDesktop = useMediaQuery("(min-width:" + 1240 + "px)");
@@ -17,7 +18,7 @@ const Header = () => {
           <Toolbar disableGutters className={styles.toolbar}>
             {/* header-logo */}
             <Box>
-              <NavLink to="/">
+              <NavLink to='/home'>
                 <img
                   data-src={logo}
                   alt="logo"

@@ -59,7 +59,6 @@ const CardSlider = ({ cardData, Component, slides }) => {
         breakpoint: 900,
         settings: {
           slidesToShow: 2,
-          // slidesToScroll: 1,
           arrows: false,
           dots: true,
         },

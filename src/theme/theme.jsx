@@ -189,5 +189,17 @@ theme = createTheme({
         },
       },
     },
+    
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          minWidth: 150,
+          padding: "0 0.5rem",
+          [theme.breakpoints.down("sm")]: {
+            minWidth: "70%",
+          },
+        },
+      },
+    },
   },
 });
