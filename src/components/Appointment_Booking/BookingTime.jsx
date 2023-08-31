@@ -3,10 +3,9 @@ import Calendar from "react-calendar";
 import { NavigationArrow, SVG_Calendar } from "../../common/SVG_Icons";
 import {
   addMonthsToDate,
-  convertToIST,
   extractHourAndMinute,
-  formatTime,
   get24HrsFrmAMPM,
+  getAMPMFrm24Hrs,
   getTotalTimeSlots,
   normaliseDateToReadableString,
 } from "./utils";
@@ -18,11 +17,8 @@ const BookingTime = ({
   handleShow,
 }) => {
   const BOOKING_DURATION_MONTHS = 2;
-  const START_DATE = convertToIST(new Date());
-  const END_DATE = addMonthsToDate(
-    convertToIST(new Date()),
-    BOOKING_DURATION_MONTHS
-  );
+  const START_DATE = new Date();
+  const END_DATE = addMonthsToDate(new Date(), BOOKING_DURATION_MONTHS);
 
   const [timeDisplay, setTimeDisplay] = useState();
   const [calendarDate, setCalendarDate] = useState(START_DATE);
@@ -33,8 +29,7 @@ const BookingTime = ({
   };
 
   const getAvailableTimeSlots = (selectedDate) => {
-    const currentTime = new Date().getTime()
-
+    let currentTime = new Date().getTime()
     let totalWorkingSlots = getTotalTimeSlots(
       selectedProfile.workSchedule,
       selectedDate,
@@ -68,16 +63,14 @@ const BookingTime = ({
   };
 
   const onTimeSelect = (e) => {
-    const { hours, minutes } = extractHourAndMinute(
-      get24HrsFrmAMPM(e.target.ariaLabel)
-    );
+    const { hours, minutes } = extractHourAndMinute(get24HrsFrmAMPM(e.target.ariaLabel));
 
     const tempDate = new Date(
       calendarDate.getFullYear(),
       calendarDate.getMonth(),
       calendarDate.getDate(),
       hours,
-      minutes
+      minutes,
     );
 
     setTimeout(() => updateSelectedTime(tempDate), 200);
@@ -95,7 +88,13 @@ const BookingTime = ({
     if (selectedTime) {
       const timeString = `
       ${normaliseDateToReadableString(selectedTime)} at 
-      ${formatTime(selectedTime)}`;
+      ${getAMPMFrm24Hrs(
+        `${
+          selectedTime.getHours() < 10
+            ? `0${selectedTime.getHours()}`
+            : selectedTime.getHours()
+        }:${selectedTime.getMinutes() === 0 ? "00" : selectedTime.getMinutes()}`
+      )}`;
 
       return (
         <div className="selection-response response-success">

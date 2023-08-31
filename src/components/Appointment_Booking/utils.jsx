@@ -15,33 +15,6 @@ export const normaliseDateToReadableString = (d) => {
   return result;
 };
 
-// Utility function to convert local time to IST
-export const convertToIST = (localDate) => {
-  const offsetIST = 5.5; // IST is UTC+5:30
-
-  const utcTime = localDate.getTime() + localDate.getTimezoneOffset() * 60000;
-  const istTime = new Date(utcTime + 3600000 * offsetIST);
-
-  return istTime;
-};
-
-// Utility function to format time from a Date object
-export const formatTime = (date) => {
-  return date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-};
-
-// Utility function to extract hour and minute from a time string
-export const extractHourAndMinute = (timeString) => {
-  const [hours, minutes] = timeString
-    .split(":")
-    .map((part) => parseInt(part, 10));
-  return { hours, minutes };
-};
-
 /**
  * Date doesn't matter
  * @param  {string} time
@@ -54,19 +27,33 @@ export const timeToMilliseconds = (time) => {
   return updateMinsAndHours;
 };
 
-// Utility function to convert 12-hour AM-PM format to 24-hour format
+/**
+ * @param  {number | string} hours
+ * @param  {number | string} mins
+ * @returns {string} returns formatted time i.e. 09:00, 18:30
+ */
+export const getAndFormatTime = (hours, mins) => {
+  return `${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}`;
+};
+
+/* ***** convert 24hrs into 12hrs ***** */
+export const getAMPMFrm24Hrs = (time) => {
+  const [sHours, minutes] = time.match(/([0-9]{1,2}):([0-9]{2})/).slice(1);
+  const period = +sHours < 12 ? "AM" : "PM";
+  const hours = +sHours % 12 || 12;
+
+  return `${hours}:${minutes} ${period}`;
+};
+
+/* ***** convert 12hrs into 24hrs ***** */
 export const get24HrsFrmAMPM = (time) => {
-  const [timePart, period] = time.split(" ");
-  const [hours, minutes] = timePart.split(":");
-  const parsedHours = parseInt(hours, 10);
+  const [sHours, minutes, period] = time
+    .match(/([0-9]{1,2}):([0-9]{2}) (AM|PM)/)
+    .slice(1);
+  const PM = period === "PM";
+  const hours = (+sHours % 12) + (PM ? 12 : 0);
 
-  if (period === "PM" && parsedHours !== 12) {
-    return `${parsedHours + 12}:${minutes}`;
-  } else if (period === "AM" && parsedHours === 12) {
-    return `00:${minutes}`;
-  }
-
-  return `${hours}:${minutes}`;
+  return `${("0" + hours).slice(-2)}:${minutes}`;
 };
 
 /* ***** create time intervals ***** */
@@ -80,10 +67,15 @@ export const createTimeIntervals = (startTime, endTime, interval) => {
     i < endTime;
     i = new Date(i + interval * 60000).getTime()
   ) {
-    timeSlots.push(formatTime(new Date(i)));
+    timeSlots.push(
+      getAMPMFrm24Hrs(
+        getAndFormatTime(new Date(i).getHours(), new Date(i).getMinutes())
+      )
+    );
   }
   return timeSlots;
 };
+
 
 // Get all times available base on schedule
 export const getTotalTimeSlots = (schedule, date, interval) => {
@@ -95,11 +87,8 @@ export const getTotalTimeSlots = (schedule, date, interval) => {
   }
 
   if (daySchedule) {
-    const start = extractHourAndMinute(get24HrsFrmAMPM(daySchedule.startTime))
-    const end = extractHourAndMinute(get24HrsFrmAMPM(daySchedule.endTime))
-
-    let startHour = new Date(date).setHours(start.hours, start.minutes, 0, 0)
-    let endHour = new Date(date).setHours(end.hours, end.minutes, 0, 0)
+    let startHour = timeToMilliseconds(get24HrsFrmAMPM(daySchedule.startTime));
+    let endHour = timeToMilliseconds(get24HrsFrmAMPM(daySchedule.endTime));
 
     const totalTimeSlots = createTimeIntervals(startHour, endHour, interval);
 
@@ -107,3 +96,21 @@ export const getTotalTimeSlots = (schedule, date, interval) => {
   }
 };
 
+
+// Utility function to extract hour and minute from a time string
+export const extractHourAndMinute = (timeString) => {
+  const [hours, minutes] = timeString
+    .split(":")
+    .map((part) => parseInt(part, 10));
+  return { hours, minutes };
+};
+
+
+// Utility function to format time from a Date object
+export const formatTime = (date) => {
+  return date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+};

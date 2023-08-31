@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Item from "./Item";
 import { listOfDoctors } from "./data";
+import Item from "./Item";
 import BookingTime from "./BookingTime";
 import BookingForm from "./BookingForm";
 import Success from "./Success";
@@ -40,15 +40,15 @@ const Container = ({ cardTitle }) => {
       ) : (
         <div className="container">
           <div className="container-header">
-            <h3 className="title">Book your appointment</h3>
-            <h4 className="subtext">Fill in the following information</h4>
+            <h3 className="title">Book your appointment online</h3>
+            <h4 className="subtitle">Fill in the following information</h4>
           </div>
 
           <div className="container-body">
             {!show ? (
               <Item
                 number={1}
-                title={"Pick an appointment time"}
+                title="Pick an appointment time"
                 body={
                   <BookingTime
                     selectedProfile={doctorProfile}
@@ -61,13 +61,13 @@ const Container = ({ cardTitle }) => {
             ) : (
               <Item
                 number={2}
-                title={"Confirm your appointment"}
+                title="Confirm your appointment"
                 body={
                   <BookingForm
                     selectedTime={selectedTime}
                     handleSuccess={handleSuccess}
-                    cardTitle={cardTitle && cardTitle}
                     updateAppointment={updateAppointment}
+                    cardTitle={cardTitle}
                   />
                 }
               />

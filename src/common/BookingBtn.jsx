@@ -28,17 +28,17 @@ const modalBoxStyle = {
   borderRadius: "1rem",
 };
 
-export const BookingBtn = ({isOnCard, title}) => {
-  const [cardTitle, setCardTitle] = useState('')
+export const BookingBtn = ({ isOnCard, title }) => {
+  const [cardTitle, setCardTitle] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
-    setOpen(!open)
-    if(isOnCard) {
-      setCardTitle(title)
+    setOpen(!open);
+    if (isOnCard) {
+      setCardTitle(title);
     }
   };
   const handleClose = () => setOpen(false);
-  
+
   return (
     <>
       <Button style={btnStyle} onClick={handleOpen}>
