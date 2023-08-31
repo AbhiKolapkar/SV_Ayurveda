@@ -33,7 +33,7 @@ export const SubTitle = ({ title, subText }) => {
   return (
     <>
       <Box my={"1.5rem"}>
-        <h3 className={styles.subTitle}>{title}</h3>
+        <h3 className={styles.subTitle}>SV- {title}</h3>
         <p className={styles.subText}>{subText}</p>
       </Box>
     </>

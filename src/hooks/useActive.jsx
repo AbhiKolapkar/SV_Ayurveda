@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useState } from "react";
 
-const useActive = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const useActive = (initState) => {
+  const [active, setActive] = useState(initState);
 
-export default useActive
+  const handleActive = (i) => {
+    setActive(i);
+  };
+
+  const activeClass = (i) => {
+    return active === i ? "active_tab" : "";
+  };
+
+  return { active, handleActive, activeClass };
+};
+
+export default useActive;

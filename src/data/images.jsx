@@ -59,6 +59,7 @@ import img8 from "../assets/images/img8.jpg";
 import img9 from "../assets/images/img9.png";
 import img10 from "../assets/images/img10.jpg";
 
+
 export const BannerImages_Data = {
   heroBanner1: hero_banner1,
   heroBanner2: hero_banner2,

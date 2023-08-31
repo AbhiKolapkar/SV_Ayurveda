@@ -1,7 +1,9 @@
-import { Gallery_Images_Data } from "./images";
+import { Gallery_Images_Data, Happy_Clients_Images } from "./images";
 
-const {img1, img2, img3, img4, img5, img6, img7, img8, img9} = Gallery_Images_Data
+const { img1, img2, img3, img4, img5, img6, img7, img8, img9 } =
+  Gallery_Images_Data;
 
+const { client1, client2, client3 } = Happy_Clients_Images;
 
 /* **** *** media data *** **** */
 export const Media_Data = [
@@ -52,3 +54,15 @@ export const Media_Data = [
   { id: 14, type: "image", url: img8 },
   { id: 15, type: "image", url: img9 },
 ];
+
+export const happy_clients = {
+  category: "Gharbhsanskar",
+  clients: [
+    { id: 1, img: client1 },
+    { id: 2, img: client2 },
+    { id: 3, img: client3 },
+    { id: 2, img: client2 },
+    { id: 3, img: client3 },
+    { id: 1, img: client1 },
+  ],
+};

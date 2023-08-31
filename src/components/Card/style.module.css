@@ -39,7 +39,7 @@
 }
 
 .card .desc {
-  margin-block: 0.52rem;
+  margin-block: 0.52rem 1rem;
 }
 
 .contentBox button a {
