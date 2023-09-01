@@ -29,6 +29,8 @@ const Container = ({ cardTitle }) => {
     setAppointment(val);
   };
 
+  // console.log(appointment);
+
   return (
     <>
       {success ? (

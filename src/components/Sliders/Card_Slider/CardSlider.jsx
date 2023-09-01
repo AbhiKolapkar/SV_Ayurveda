@@ -92,7 +92,7 @@ const CardSlider = ({ cardData, Component, slides }) => {
               }) => (
                 <Component
                   key={id}
-                  img={image}
+                  image={image}
                   title={title}
                   desc={desc}
                   userName={userName}
@@ -106,7 +106,7 @@ const CardSlider = ({ cardData, Component, slides }) => {
           : cardData.map(({ id, img, name, designation }) => (
               <div className="member-card" key={id}>
                 <div className="imgBox">
-                  <img data-src={img} alt="" className="lazyload" />
+                  <img src={img} alt="" loading="lazy" />
                 </div>
                 <div className="member-info" style={{ textAlign: "center" }}>
                   <Typography variant="h5" color={"text.secondary"}>

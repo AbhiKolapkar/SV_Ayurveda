@@ -42,10 +42,9 @@
 
 .textbox:focus + .label,
 .textbox:not(:placeholder-shown).textbox:not(:focus)+ .label {
-  top: -0.75rem;
+  top: -1.5rem;
   left: -1rem;
   z-index: 10;
-  background-color: #FFFDFD95;
   padding-inline: 0.5rem 0.25rem;
   font-size: 0.75rem;
 }

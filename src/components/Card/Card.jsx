@@ -12,7 +12,7 @@ const Card = (props) => {
     <>
       <div className={styles.card}>
         <div className={`imgBox`}>
-          <img data-src={image} alt="" className="lazyload" />
+          <img src={image} alt="" loading="lazy" />
         </div>
 
         <div className={styles.contentBox}>

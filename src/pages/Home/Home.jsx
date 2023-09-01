@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import HeroSlider from "../../components/Sliders/Hero_Slider/HeroSlider";
 
@@ -17,10 +17,27 @@ import CardSlider from "../../components/Sliders/Card_Slider/CardSlider";
 import Accordion from "../../components/Accordion/Accordion";
 import Card from "../../components/Card/Card";
 import Counter from "../../components/Counter/Counter";
+import { TREATMENTS_API_URL } from "../../data/apiData";
+import axios from "axios";
 
 const Home = () => {
-  const { quoteBanner, counterBanner, ctaBanner } = BannerImages_Data;
+  const { quoteBanner, ctaBanner } = BannerImages_Data;
   const { founder1, founder2 } = Home_Page_Images;
+  const [data, setData] = useState([]);
+  let allTreatments = []
+
+  useEffect(() => {
+    axios.get(TREATMENTS_API_URL).then((res) => setData(res.data.treatments))
+    .catch(error => console.log(error))
+  }, [TREATMENTS_API_URL]);
+
+  const treatments = data.map(item => {
+    const cards = item.cards
+    cards.map(data => allTreatments.push(data))
+  })
+  
+  allTreatments = allTreatments.slice(0, 9)
+
   return (
     <>
       {/* hero-banner slider */}
@@ -128,6 +145,17 @@ const Home = () => {
             </>
           }
         />
+      </section>
+
+      {/* treatments section */}
+      <section className="section">
+        <Title title="Treatments" />
+
+        <Container maxWidth="xl">
+          <Container maxWidth="lg" disableGutters>
+            {allTreatments ? <CardSlider cardData={allTreatments} Component={Card} slides={3} /> : ''}
+          </Container>
+        </Container>
       </section>
 
       {/* counter section */}

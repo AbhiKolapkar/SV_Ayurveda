@@ -1,22 +1,30 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Error } from "@mui/icons-material";
-import { formatTime } from "./utils";
+import { getAMPMFrm24Hrs } from "./utils";
+import axios from "axios";
+import { APPOINTMENT_API_URL } from "../../data/apiData";
+import { listOfMonths } from "./data";
 
-const BookingForm = ({
-  selectedTime,
-  handleSuccess,
-  cardTitle,
-  updateAppointment,
-}) => {
+const BookingForm = ({ selectedTime, handleSuccess, cardTitle }) => {
   const {
     register,
     reset,
     handleSubmit,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm();
+
+  const date = `${selectedTime.getDate()}-${listOfMonths[
+    selectedTime.getMonth()
+  ]}-${selectedTime.getFullYear()}`;
+  const timeString = getAMPMFrm24Hrs(
+    `${
+      selectedTime.getHours() < 10
+        ? 0`${selectedTime.getHours()}`
+        : selectedTime.getHours()
+    }:${selectedTime.getMinutes() === 0 ? "00" : selectedTime.getMinutes()}`
+  );
 
   useEffect(() => {
     setValue("purpose", cardTitle ? cardTitle : "General");
@@ -24,16 +32,37 @@ const BookingForm = ({
 
   const onSubmit = async (data) => {
     handleSuccess();
-    const formData = getValues();
 
-    const makeAppointment = {
-      purpose: "General",
-      ...formData,
-      date: `${selectedTime.getDate()}-${selectedTime.getMonth()}-${selectedTime.getFullYear()}`,
-      time: formatTime(selectedTime),
-    };
+    const formData = new FormData();
 
-    updateAppointment(makeAppointment);
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+    formData.append("date", date);
+    formData.append("time", timeString);
+
+    const response = await axios.post(APPOINTMENT_API_URL, formData);
+    console.log(response.data);
+
+    // try {
+    //   handleSuccess();
+    //   const formData = getValues();
+
+    //   const makeAppointment = {
+    //     ...formData,
+    //     date: date,
+    //     time: timeString,
+    //   };
+    //   updateAppointment(makeAppointment);
+
+    //   const response = await axios.post(
+    //     "https://28cc-14-194-155-90.ngrok-free.app/book-appointment",
+    //     makeAppointment
+    //   );
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.log("Error: ", error);
+    // }
 
     reset();
   };
@@ -66,8 +95,7 @@ const BookingForm = ({
                     type="radio"
                     id="online"
                     value="Online"
-                    name="meet_mode"
-                    {...register("meet_mode", {
+                    {...register("mode", {
                       required: "Please select an option",
                     })}
                   />
@@ -78,8 +106,7 @@ const BookingForm = ({
                     type="radio"
                     id="offline"
                     value="Offline"
-                    name="meet_mode"
-                    {...register("meet_mode", {
+                    {...register("mode", {
                       required: "Please select an option",
                     })}
                   />
@@ -151,8 +178,6 @@ const BookingForm = ({
               )}
             </div>
           </div>
-
-          {/* {response && response} */}
 
           <input type="submit" value="Book an Appointment" />
         </form>

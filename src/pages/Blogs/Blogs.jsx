@@ -8,7 +8,6 @@ import { BLOGS_API_URL } from "../../data/apiData";
 const Blogs = () => {
   const [blogsData, setBlogsData] = useState([]);
   const API_URL = BLOGS_API_URL;
-  console.log(BLOGS_API_URL);
 
   useEffect(() => {
     fetch(API_URL)

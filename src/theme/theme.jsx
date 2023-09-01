@@ -53,8 +53,6 @@ theme = createTheme({
       fontWeight: 700,
       fontStyle: "normal",
       lineHeight: "normal",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
       [theme.breakpoints.down("lg")]: {
         fontSize: "2rem", // 32px
       },
@@ -68,8 +66,6 @@ theme = createTheme({
       fontWeight: 700,
       fontStyle: "normal",
       lineHeight: "normal",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
       [theme.breakpoints.down("sm")]: {
         fontSize: "1.5rem", // 24px
       },
@@ -80,8 +76,6 @@ theme = createTheme({
       fontWeight: 500,
       fontStyle: "normal",
       lineHeight: "normal",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
       [theme.breakpoints.down("lg")]: {
         fontSize: "1.5625rem", // 25px
       },
@@ -95,8 +89,6 @@ theme = createTheme({
       fontWeight: 600,
       fontStyle: "italic",
       lineHeight: "164%",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
       [theme.breakpoints.down("lg")]: {
         fontSize: "1rem", // 20px
       },
@@ -107,8 +99,6 @@ theme = createTheme({
       fontWeight: 600,
       fontStyle: "normal",
       lineHeight: "normal",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
       [theme.breakpoints.down("md")]: {
         fontSize: "1.125rem", // 18px
       },
@@ -119,8 +109,6 @@ theme = createTheme({
       fontWeight: 500,
       fontStyle: "normal",
       lineHeight: "normal",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
       [theme.breakpoints.down("sm")]: {
         fontSize: "1rem", // 16px
       },
@@ -131,8 +119,6 @@ theme = createTheme({
       fontWeight: 500,
       fontStyle: "normal",
       lineHeight: "normal",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
     },
     subtitle2: {
       fontFamily: "var(--poppins)",
@@ -140,8 +126,6 @@ theme = createTheme({
       fontWeight: 400,
       fontStyle: "normal",
       lineHeight: "normal",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
     },
     body1: {
       fontFamily: "var(--poppins)",
@@ -149,8 +133,6 @@ theme = createTheme({
       fontWeight: 400,
       fontStyle: "normal",
       lineHeight: "158%",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
     },
     body2: {
       fontFamily: "var(--poppins)",
@@ -158,8 +140,6 @@ theme = createTheme({
       fontWeight: 400,
       fontStyle: "normal",
       lineHeight: "174%",
-      whiteSpace: "pre-wrap",
-      wordWrap: "break-word",
     },
     button: {
       fontFamily: "var(--poppins)",

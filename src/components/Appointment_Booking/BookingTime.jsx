@@ -7,8 +7,11 @@ import {
   get24HrsFrmAMPM,
   getAMPMFrm24Hrs,
   getTotalTimeSlots,
+  istTime,
   normaliseDateToReadableString,
 } from "./utils";
+import { BOOKED_APPOINTMENT_API_URL } from "../../data/apiData";
+import axios from "axios";
 
 const BookingTime = ({
   selectedProfile,
@@ -19,17 +22,30 @@ const BookingTime = ({
   const BOOKING_DURATION_MONTHS = 2;
   const START_DATE = new Date();
   const END_DATE = addMonthsToDate(new Date(), BOOKING_DURATION_MONTHS);
+  // console.log(istTime(START_DATE));
 
   const [timeDisplay, setTimeDisplay] = useState();
   const [calendarDate, setCalendarDate] = useState(START_DATE);
   const [calendarDisplay, setCalendarDisplay] = useState(false);
+  const [bookedSlots, setBookedSlots] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(BOOKED_APPOINTMENT_API_URL)
+      .then((res) => setBookedSlots(res.data.appointments))
+      .catch((error) => console.log(error));
+  }, [BOOKED_APPOINTMENT_API_URL]);
+
+  // bookedSlots.map(item => {
+  //   console.log(istTime(new Date(`${item.date} ${item.time}`)));
+  // })
 
   const onCalendarDisplay = () => {
     setCalendarDisplay(!calendarDisplay);
   };
 
   const getAvailableTimeSlots = (selectedDate) => {
-    let currentTime = new Date().getTime()
+    let currentTime = new Date().getTime();
     let totalWorkingSlots = getTotalTimeSlots(
       selectedProfile.workSchedule,
       selectedDate,
@@ -46,11 +62,14 @@ const BookingTime = ({
       (val) => !totalRestingSlots.includes(val)
     );
 
-    const availableWorkingSlots = totalWorkingSlots.filter(time => {
+    let availableWorkingSlots = totalWorkingSlots.filter((time) => {
       const getTime = extractHourAndMinute(get24HrsFrmAMPM(time));
-      const bigTime = new Date(selectedDate).setHours(getTime.hours, getTime.minutes, 0, 0)
-      return (bigTime >= currentTime);
-    })
+      const bigTime = new Date(selectedDate).setHours(
+        getTime.hours,
+        getTime.minutes,
+      );
+      return bigTime >= currentTime;
+    });
     return availableWorkingSlots;
   };
 
@@ -63,14 +82,16 @@ const BookingTime = ({
   };
 
   const onTimeSelect = (e) => {
-    const { hours, minutes } = extractHourAndMinute(get24HrsFrmAMPM(e.target.ariaLabel));
+    const { hours, minutes } = extractHourAndMinute(
+      get24HrsFrmAMPM(e.target.ariaLabel)
+    );
 
     const tempDate = new Date(
       calendarDate.getFullYear(),
       calendarDate.getMonth(),
       calendarDate.getDate(),
       hours,
-      minutes,
+      minutes
     );
 
     setTimeout(() => updateSelectedTime(tempDate), 200);
@@ -91,7 +112,7 @@ const BookingTime = ({
       ${getAMPMFrm24Hrs(
         `${
           selectedTime.getHours() < 10
-            ? `0${selectedTime.getHours()}`
+            ? 0`${selectedTime.getHours()}`
             : selectedTime.getHours()
         }:${selectedTime.getMinutes() === 0 ? "00" : selectedTime.getMinutes()}`
       )}`;

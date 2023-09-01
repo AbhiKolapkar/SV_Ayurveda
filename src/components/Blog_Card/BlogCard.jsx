@@ -6,13 +6,14 @@ import styles from "./style.module.css";
 
 const BlogCard = (props) => {
   const { id, image, date, category, title, desc, slug } = props;
+  const blogTitle = slug.split('/')[4]
 
   return (
     <>
       <div key={id} className={styles.blogCard}>
         <div className="imgBox">
-          <NavLink to={`/${slug}`}>
-            <img data-src={image} alt="" className="lazyload" />
+          <NavLink to={`/blog/${blogTitle}`}>
+            <img src={image} alt="" loading="lazy" className={styles.img} />
           </NavLink>
         </div>
 
@@ -32,7 +33,7 @@ const BlogCard = (props) => {
               color="text.secondary"
               className={styles.title}
             >
-              <NavLink to={`/${slug}`}>{title}</NavLink>
+              <NavLink to={`/blog/${blogTitle}`}>{title}</NavLink>
             </Typography>
 
             <pre>
@@ -47,7 +48,7 @@ const BlogCard = (props) => {
           </div>
 
           <button className={styles.read_moreBtn}>
-            <NavLink to={`/${slug}`}>
+            <NavLink to={`/blog/${blogTitle}`}>
               <Typography variant="button" color={"text.secondary"}>
                 Read More
               </Typography>

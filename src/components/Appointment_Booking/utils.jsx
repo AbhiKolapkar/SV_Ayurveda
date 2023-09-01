@@ -1,5 +1,18 @@
 import { listOfDays, listOfMonths } from "./data";
 
+export const istTime = (date) => {
+  const istOffset = 330;
+
+  // Calculate the new time based on the offset
+  const istTime = new Date(date.getTime() + istOffset * 60 * 1000);
+
+  // Convert to IST formatted string
+  return istTime.toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata", // Time zone identifier for IST
+    hour12: true, // Use 24-hour format
+  });
+};
+
 export const addMonthsToDate = (date, numOfMonth) => {
   return new Date(date.setMonth(date.getMonth() + numOfMonth));
 };
@@ -76,7 +89,6 @@ export const createTimeIntervals = (startTime, endTime, interval) => {
   return timeSlots;
 };
 
-
 // Get all times available base on schedule
 export const getTotalTimeSlots = (schedule, date, interval) => {
   let daySchedule = null;
@@ -96,7 +108,6 @@ export const getTotalTimeSlots = (schedule, date, interval) => {
   }
 };
 
-
 // Utility function to extract hour and minute from a time string
 export const extractHourAndMinute = (timeString) => {
   const [hours, minutes] = timeString
@@ -104,7 +115,6 @@ export const extractHourAndMinute = (timeString) => {
     .map((part) => parseInt(part, 10));
   return { hours, minutes };
 };
-
 
 // Utility function to format time from a Date object
 export const formatTime = (date) => {

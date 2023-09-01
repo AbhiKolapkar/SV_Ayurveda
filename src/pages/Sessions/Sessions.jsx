@@ -9,7 +9,6 @@ import { SESSIONS_API_URL } from "../../data/apiData";
 
 const Sessions = () => {
   const { sessionBanner } = BannerImages_Data;
-  const API_URL = "";
   const [sessionsData, setSessionsData] = useState(null);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ const Sessions = () => {
       .get(SESSIONS_API_URL)
       .then((res) => setSessionsData(res.data.sessions))
       .catch((error) => console.error("error fetching data", error));
-  }, []);
+  }, [SESSIONS_API_URL]);
 
   return (
     <>
